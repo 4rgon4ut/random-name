@@ -1,0 +1,14 @@
+[
+    {"type": "addItem", "key": "vegetable3", "value": "cabbage"},
+    {"type": "deleteItem", "key": "vegetable1"},
+    {"type": "getItem", "key": "vegetable2"},
+    {"type": "getAllItems"},
+    {"type": "addItem", "key": "vegetable4", "value": "spinach"},
+    {"type": "getItem", "key": "vegetable3"},
+    {"type": "deleteItem", "key": "vegetable2"},
+    {"type": "getAllItems"},
+    {"type": "getItem", "key": "vegetable4"},
+    {"type": "addItem", "key": "vegetable5", "value": "kale"},
+    {"type": "getAllItems"},
+    {"type": "deleteItem", "key": "vegetable3"}
+]

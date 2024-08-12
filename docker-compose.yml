@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  server:
+    build:
+      context: .
+      dockerfile: cmd/server/Dockerfile
+    depends_on:
+      - rabbitmq
+    volumes:
+      - ./output:/app/output
+    entrypoint: []
+    command: >
+      ./server
+      -queue-url amqp://guest:guest@rabbitmq/
+      -queue-name commands
+      -output /app/output/output.txt
+    restart: always
+
+  client1:
+    build:
+      context: .
+      dockerfile: cmd/client/Dockerfile
+    depends_on:
+      - server
+      - rabbitmq
+    working_dir: /app
+    entrypoint: []
+    volumes:
+      - ./data/client1_input.json:/app/input/client1_input.json
+    command: >
+      ./client
+      -queue-url amqp://guest:guest@rabbitmq:5672/
+      -queue-name commands
+      -input-file ./input/client1_input.json
+    restart: on-failure
+
+  client2:
+    build:
+      context: .
+      dockerfile: cmd/client/Dockerfile
+    depends_on:
+      - rabbitmq
+      - server
+    working_dir: /app
+    entrypoint: []
+    volumes:
+      - ./data/client2_input.json:/app/input/client2_input.json
+    command: >
+      ./client
+      -queue-url amqp://guest:guest@rabbitmq:5672/
+      -queue-name commands
+      -input-file ./input/client2_input.json
+    restart: on-failure
+
+  client3:
+    build:
+      context: .
+      dockerfile: cmd/client/Dockerfile
+    depends_on:
+      - rabbitmq
+      - server
+    working_dir: /app
+    entrypoint: []
+    volumes:
+      - ./data/client3_input.json:/app/input/client3_input.json
+    command: >
+      ./client
+      -queue-url amqp://guest:guest@rabbitmq/
+      -queue-name commands
+      -input-file ./input/client3_input.json
+    restart: on-failure
+
+volumes:
+  output:

@@ -1,0 +1,14 @@
+[
+    {"type": "deleteItem", "key": "fruit2"},
+    {"type": "addItem", "key": "fruit3", "value": "cherry"},
+    {"type": "getAllItems"},
+    {"type": "getItem", "key": "fruit1"},
+    {"type": "addItem", "key": "fruit4", "value": "date"},
+    {"type": "getItem", "key": "fruit4"},
+    {"type": "deleteItem", "key": "fruit1"},
+    {"type": "getAllItems"},
+    {"type": "addItem", "key": "fruit5", "value": "elderberry"},
+    {"type": "getAllItems"},
+    {"type": "getItem", "key": "fruit3"},
+    {"type": "deleteItem", "key": "fruit5"}
+]

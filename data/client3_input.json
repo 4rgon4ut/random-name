@@ -1,0 +1,14 @@
+[
+    {"type": "getItem", "key": "drink1"},
+    {"type": "addItem", "key": "drink4", "value": "soda"},
+    {"type": "deleteItem", "key": "drink2"},
+    {"type": "getAllItems"},
+    {"type": "addItem", "key": "drink5", "value": "milk"},
+    {"type": "getItem", "key": "drink4"},
+    {"type": "deleteItem", "key": "drink1"},
+    {"type": "getAllItems"},
+    {"type": "addItem", "key": "drink3", "value": "tea"},
+    {"type": "deleteItem", "key": "drink4"},
+    {"type": "getAllItems"},
+    {"type": "getItem", "key": "drink3"}
+]
