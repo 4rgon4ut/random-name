@@ -10,17 +10,22 @@ import (
 	"github.com/4rgon4ut/lightblocks-assignment/pkg/server"
 )
 
+var (
+  queueURL  string
+  queueName string
+  output string
+)
 
+func init() {
+  flag.StringVar(&queueURL, "queue-url", "amqp://guest:guest@localhost:5672/", "URL of the RabbitMQ server")
+  flag.StringVar(&queueName, "queue-name", "commands", "Name of the queue to use")
+  flag.StringVar(&output, "output", "output.txt", "File to read commands from")
+  flag.Parse()
+}
 
 func main() {
-    // Define command-line flags
-    queueURL := flag.String("queue-url", "amqp://guest:guest@localhost:5672/", "RabbitMQ URL")
-    queueName := flag.String("queue-name", "commands", "Queue name")
-    outputFile := flag.String("output", "output.txt", "Output file path")
-    flag.Parse()
-
     // Create and start the server
-    srv, err := server.New(*queueURL, *queueName, *outputFile)
+    srv, err := server.New(queueURL, queueName, output)
     if err != nil {
         log.Fatalf("Failed to create server: %v", err)
     }
