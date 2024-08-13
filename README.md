@@ -23,6 +23,30 @@ Available commands:
 ## Overview
 The system consists of a server that processes commands (add, delete, get, getAll) on an ordered map data structure. Clients send commands through RabbitMQ, and the server writes results to an output file.
 
+### Input Files
+The input files for each client are located in the `data` directory of the project root. 
+- Client 1: `./data/client1_input.json`
+- Client 2: `./data/client2_input.json`
+- Client 3: `./data/client3_input.json`
+
+These files should contain JSON-formatted commands for the server to process. For example:
+
+```json
+[
+  {"type": "addItem", "key": "fruit1", "value": "apple"},
+  {"type": "getItem", "key": "fruit1"},
+  {"type": "getAllItems"}
+]
+```
+
+### Output File
+The server writes its output to a file in the output directory:
+
+Server output: ./output/output.txt
+
+This file will contain the results of `getItem` and `getAllItems` operations.
+Note: The output directory is created automatically when you run `make deps` or `make build`. If you're running the project manually, make sure this directory exists.
+
 ## Main Trade-offs
 As with many systems, the main performance bottleneck is likely to be disk I/O, as the server needs to write to the same output file.
 Reading from the ordered map is concurrent, thanks to the use of a read-write mutex (`RWMutex`). This allows multiple read operations to occur simultaneously, improving performance.
