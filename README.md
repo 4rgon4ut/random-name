@@ -42,7 +42,7 @@ These files should contain JSON-formatted commands for the server to process. Fo
 ### Output File
 The server writes its output to a file in the output directory:
 
-Server output: ./output/output.txt
+Server output: `./output/output.txt`
 
 This file will contain the results of `getItem` and `getAllItems` operations.
 Note: The output directory is created automatically when you run `make deps` or `make build`. If you're running the project manually, make sure this directory exists.
