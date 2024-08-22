@@ -7,6 +7,7 @@ import (
 type Node struct {
 	key   string
 	value string
+	prev *Node
 	next  *Node
 }
 
@@ -53,6 +54,7 @@ func (om *OrderedMap) Set(key, value string) {
 		om.tail = newNode
 	} else {
 		om.tail.next = newNode
+		newNode.prev = om.tail
 		om.tail = newNode
 	}
 }
@@ -60,30 +62,22 @@ func (om *OrderedMap) Set(key, value string) {
 func (om *OrderedMap) Delete(key string) {
 	om.mu.Lock()
 	defer om.mu.Unlock()
-
 	node, ok := om.data[key]
 	if !ok {
 		return
 	}
-
 	delete(om.data, key)
 
-	if om.head == node {
-		om.head = node.next
-		if om.head == nil {
-			om.tail = nil
-		}
+	if node.prev != nil {
+		node.prev.next = node.next
 	} else {
-		current := om.head
-		for current != nil && current.next != node {
-			current = current.next
-		}
-		if current != nil {
-			current.next = node.next
-			if current.next == nil {
-				om.tail = current
-			}
-		}
+		om.head = node.next
+	}
+
+	if node.next != nil {
+		node.next.prev = node.prev
+	} else {
+		om.tail = node.prev
 	}
 }
 
