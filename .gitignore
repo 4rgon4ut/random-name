@@ -36,8 +36,5 @@ go.work
 ehthumbs.db
 Thumbs.db
 
-# Docker
-.dockerignore
-
 # Log files
 *.log

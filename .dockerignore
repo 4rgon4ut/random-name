@@ -1,0 +1,11 @@
+.dockerignore
+
+build/
+output/
+
+README.md
+Makefile
+
+
+.vscode
+.gitignore
